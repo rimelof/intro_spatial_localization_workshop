@@ -195,20 +195,10 @@ merged.obj <- RunUMAP(merged.obj, reduction = "integrated.cca", dims = 1:30, red
 
 
 #get SCT assay
+
+DefaultAssay(merged.obj) <- 'Spatial'
+merged.obj[['Spatial']] <- JoinLayers(merged.obj[['Spatial']])
 merged.obj <- SCTransform(merged.obj,assay = 'Spatial',verbose = F)
-
-# Extract the SCT results stored in the "umi.assay"
-SCTResults(object=merged.obj, slot="umi.assay")
-scttemp <- SCTResults(merged.obj, slot="umi.assay")
-
-# Update the "umi.assay" slot of each SCT model to indicate the assay name as "Spatial"
-for(i in 1:length(scttemp)) {
-   slot(object = merged.obj@assays$SCT@SCTModel.list[[i]], name="umi.assay")<-"Spatial"
-}
-
-SCTResults(object=merged.obj, slot="umi.assay")
-# Prepare the SCT assay for marker detection by ensuring that all SCT models are processed
-merged.obj=PrepSCTFindMarkers(merged.obj,assay = 'SCT')
 
 #make obj ready for neighborhood
 #removing max column from prediction assay
