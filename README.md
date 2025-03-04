@@ -7,4 +7,4 @@ The workshop can be watched at the [Indiana O'Brien Center for Advanced Renal Mi
 
 ### Changelog
 
-03/04/2025 - Updated SCTransfor method to account for layers in the Spatial assay. This better aligns with the standard Seurat method.
+03/04/2025 - Updated SCTransform method to account for layers in the Spatial assay. This better aligns with the standard Seurat method.
